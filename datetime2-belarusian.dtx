@@ -1,0 +1,998 @@
+%\iffalse
+%<*package>
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%</package>
+%\fi
+% \iffalse
+% Doc-Source file to use with LaTeX2e
+% Copyright (C) 2021 Mikalai Keida, all rights reserved.
+% (New maintainer add relevant lines here.)
+% \fi
+% \iffalse
+%<*driver>
+\documentclass{ltxdoc}
+
+\usepackage{alltt}
+\usepackage{graphicx}
+\usepackage{fontspec}
+\usepackage[colorlinks,
+            bookmarks,
+            hyperindex=false,
+            pdfauthor={Mikalai Keida},
+            pdftitle={datetime2.sty Belarusian Module}]{hyperref}
+
+\newfontfamily\cyrillicfont{Liberation Serif}
+\setmonofont{Liberation Mono}
+
+\CheckSum{1169}
+
+\renewcommand*{\usage}[1]{\hyperpage{#1}}
+\renewcommand*{\main}[1]{\hyperpage{#1}}
+\IndexPrologue{\section*{\indexname}\markboth{\indexname}{\indexname}}
+\setcounter{IndexColumns}{2}
+
+\newcommand*{\sty}[1]{\textsf{#1}}
+\newcommand*{\opt}[1]{\texttt{#1}\index{#1=\texttt{#1}|main}}
+
+\RecordChanges
+\PageIndex
+\CodelineNumbered
+
+\begin{document}
+\DocInput{datetime2-belarusian.dtx}
+\end{document}
+%</driver>
+%\fi
+%
+%\MakeShortVerb{"}
+%
+%\title{Belarusian Module for datetime2 Package}
+%\author{Mikalai Keida (maintained)}
+%\date{2021-03-25 (v1.0)}
+%\maketitle
+%
+%This module is currently maintained and may be subject to change.
+% If you want to volunteer to take over maintanance, contact me at
+%\url{https://github.com/mkeiby/datetime2-belarusian}
+%
+%\begin{abstract}
+%This is the Belarusian language module for the \sty{datetime2}
+%package. If you want to use the settings in this module you must
+%install it in addition to installing \sty{datetime2}. If you use
+%\sty{babel} or \sty{polyglossia}, you will need this module to
+%prevent them from redefining \cs{today}. The \sty{datetime2}
+% \opt{useregional} setting must be set to "text" or "numeric"
+% for the language styles to be set.
+% Alternatively, you can set the style in the document using
+% \cs{DTMsetstyle}, but this may be changed by \cs{date}\meta{language}
+% depending on the value of the \opt{useregional} setting.
+%\end{abstract}
+%
+%I've copied the date style from \texttt{datetime2-russian}'s \cs{2021-03-15}.
+%
+%Please be aware that this may change. Whoever takes over
+% maintanance of this module may can change it as appropriate.
+%
+%Currently there is only a regionless style.
+%
+%\StopEventually{%
+%\clearpage
+%\phantomsection
+%\addcontentsline{toc}{section}{Change History}%
+%\PrintChanges
+%\addcontentsline{toc}{section}{\indexname}%
+%\PrintIndex}
+%\section{The Code}
+%\iffalse
+%    \begin{macrocode}
+%<*datetime2-belarusian-utf8.ldf>
+%    \end{macrocode}
+%\fi
+%\subsection{UTF-8}
+%This file contains the settings that use UTF-8 characters. This
+%file is loaded if XeLaTeX or LuaLaTeX are used. Please make sure
+%your text editor is set to UTF-8 if you want to view this code.
+%\changes{1.0}{2015-03-31}{Initial release}
+% Identify module
+%    \begin{macrocode}
+\ProvidesDateTimeModule{belarusian-utf8}[2021/03/25 v1.0]
+%    \end{macrocode}
+%\begin{macro}{\DTMbelarusianordinal}
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianordinal}[1]{%
+  \number#1
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianyear}
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianyear}[1]{%
+  \number#1
+  \DTMtexorpdfstring{\protect~}{\space}г.%
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%
+%\begin{macro}{\DTMbelarusianmonthname}
+% Belarusian month names.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianmonthname}[1]{%
+  \ifcase#1
+  \or
+  студзеня%
+  \or
+  лютага%
+  \or
+  сакавіка%
+  \or
+  красавіка%
+  \or
+  мая%
+  \or
+  чэрвеня%
+  \or
+  ліпеня%
+  \or
+  жніўня%
+  \or
+  верасня%
+  \or
+  кастрычніка%
+  \or
+  лістапада%
+  \or
+  снежня%
+  \fi
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianMonthname}
+% Belarusian month names start with capital.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianMonthname}[1]{%
+  \ifcase#1
+  \or
+  Студзеня%
+  \or
+  Лютага%
+  \or
+  Сакавіка%
+  \or
+  Красавіка%
+  \or
+  Мая%
+  \or
+  Чэрвеня%
+  \or
+  Ліпеня%
+  \or
+  Жніўня%
+  \or
+  Верасня%
+  \or
+  Кастрычніка%
+  \or
+  Лістапада%
+  \or
+  Снежня%
+  \fi
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianshortmonthname}
+% Abbreviated Belarusian month names.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianshortmonthname}[1]{%
+  \ifcase#1
+  \or
+  сту%
+  \or
+  лют%
+  \or
+  сак%
+  \or
+  кра%
+  \or
+  май%
+  \or
+  чэр%
+  \or
+  ліп%
+  \or
+  жні%
+  \or
+  вер%
+  \or
+  кас%
+  \or
+  ліс%
+  \or
+  сне%
+  \fi
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianShortmonthname}
+% Abbreviated Belarusian month names start with a capital.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianShortmonthname}[1]{%
+  \ifcase#1
+  \or
+  Сту%
+  \or
+  Лют%
+  \or
+  Сак%
+  \or
+  Кра%
+  \or
+  Май%
+  \or
+  Чэр%
+  \or
+  Ліп%
+  \or
+  Жні%
+  \or
+  Вер%
+  \or
+  Кас%
+  \or
+  Ліс%
+  \or
+  Сне%
+  \fi
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianweekdayname}
+% Belarusian day of week names.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianweekdayname}[1]{%
+  \ifcase#1
+  панядзелак%
+  \or
+  аўторак%
+  \or
+  серада%
+  \or
+  чацвер%
+  \or
+  пятніца%
+  \or
+  субота%
+  \or
+  нядзеля%
+  \fi
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianWeekdayname}
+% Belarusian day of week names start with a capital.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianWeekdayname}[1]{%
+  \ifcase#1
+  Панядзелак%
+  \or
+  Аўторак%
+  \or
+  Серада%
+  \or
+  Чацвер%
+  \or
+  Пятніца%
+  \or
+  Субота%
+  \or
+  Нядзеля%
+  \fi
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianshortweekdayname}
+% Abbreviated belarusian day of week names.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianshortweekdayname}[1]{%
+  \ifcase#1
+  пн%
+  \or
+  аўт%
+  \or
+  сер%
+  \or
+  чц%
+  \or
+  пт%
+  \or
+  сб%
+  \or
+  ндз%
+  \fi
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianshortWeekdayname}
+% Abbreviated Belarusian day of week start with a capital.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianshortWeekdayname}[1]{%
+  \ifcase#1
+  Пн%
+  \or
+  Аўт%
+  \or
+  Сер%
+  \or
+  Чац%
+  \or
+  Пт%
+  \or
+  Сб%
+  \or
+  Ндз%
+  \fi
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\iffalse
+%    \begin{macrocode}
+%</datetime2-belarusian-utf8.ldf>
+%    \end{macrocode}
+%\fi
+%\iffalse
+%    \begin{macrocode}
+%<*datetime2-belarusian-ascii.ldf>
+%    \end{macrocode}
+%\fi
+%\subsection{ASCII}
+%This file contains the settings that use \LaTeX\ commands for
+%non-ASCII characters. This should be input if neither XeLaTeX nor
+%LuaLaTeX are used. Even if the user has loaded \sty{inputenc} with
+%"utf8", this file should still be used not the
+%\texttt{datetime2-belarusian-utf8.ldf} file as the non-ASCII
+%characters are made active in that situation and would need
+%protecting against expansion.
+%\changes{1.0}{2021-03-25}{Initial release}
+% Identify module
+%    \begin{macrocode}
+\ProvidesDateTimeModule{belarusian-ascii}[2021/03/25 v1.0]
+%    \end{macrocode}
+%
+%If abbreviated dates are supported, short month names should be
+%likewise provided.
+%\begin{macro}{\DTMbelarusianordinal}
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianordinal}[1]{%
+  \number#1
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianyear}
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianyear}[1]{%
+  \number#1 
+  \DTMtexorpdfstring{\protect~}{\space}\protect\cyrg.%
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianmonthname}
+% Belarusian month names.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianmonthname}[1]{%
+  \ifcase#1
+  \or
+   \protect\cyrs\protect\cyrt\protect\cyru\protect\cyrd\protect\cyrz
+    \protect\cyre\protect\cyrn\protect\cyrya
+  \or
+   \protect\cyrl\protect\cyryu\protect\cyrt\protect\cyra\protect\cyrg
+    \protect\cyra
+  \or
+   \protect\cyrs\protect\cyra\protect\cyrk\protect\cyra\protect\cyrv
+    \protect\cyrii\protect\cyrk\protect\cyra
+  \or
+   \protect\cyrk\protect\cyrr\protect\cyra\protect\cyrs\protect\cyra
+    \protect\cyrv\protect\cyrii\protect\cyrk\protect\cyra
+  \or
+   \protect\cyrm\protect\cyra\protect\cyrya
+  \or
+   \protect\cyrch\protect\cyrerev\protect\cyrr\protect\cyrv
+    \protect\cyre\protect\cyrn\protect\cyrya
+  \or
+   \protect\cyrl\protect\cyrii\protect\cyrp\protect\cyre
+    \protect\cyrn\protect\cyrya
+  \or
+   \protect\cyrzh\protect\cyrn\protect\cyrii\protect\cyrushrt
+    \protect\cyrn\protect\cyrya
+  \or
+   \protect\cyrv\protect\cyre\protect\cyrr\protect\cyra\protect\cyrs
+    \protect\cyrn\protect\cyrya
+  \or
+   \protect\cyrk\protect\cyra\protect\cyrs\protect\cyrt\protect\cyrr
+    \protect\cyrery\protect\cyrch\protect\cyrn\protect\cyrii
+    \protect\cyrk\protect\cyra
+  \or
+   \protect\cyrl\protect\cyrii\protect\cyrs\protect\cyrt\protect\cyra
+    \protect\cyrp\protect\cyra\protect\cyrd\protect\cyra
+  \or
+   \protect\cyrs\protect\cyrn\protect\cyre\protect\cyrzh\protect\cyrn
+    \protect\cyrya
+  \fi
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianMonthname}
+% Belarusian month names start with a capital.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianMonthname}[1]{%
+  \ifcase#1
+  \or
+   \protect\CYRS\protect\cyrt\protect\cyru\protect\cyrd\protect\cyrz
+    \protect\cyre\protect\cyrn\protect\cyrya
+  \or
+   \protect\CYRL\protect\cyryu\protect\cyrt\protect\cyra\protect\cyrg
+    \protect\cyra
+  \or
+   \protect\CYRS\protect\cyra\protect\cyrk\protect\cyra\protect\cyrv
+    \protect\cyrii\protect\cyrk\protect\cyra
+  \or
+   \protect\CYRK\protect\cyrr\protect\cyra\protect\cyrs\protect\cyra
+    \protect\cyrv\protect\cyrii\protect\cyrk\protect\cyra
+  \or
+   \protect\CYRM\protect\cyra\protect\cyrya
+  \or
+   \protect\CYRCH\protect\cyrerev\protect\cyrr\protect\cyrv
+    \protect\cyre\protect\cyrn\protect\cyrya
+  \or
+   \protect\CYRL\protect\cyrii\protect\cyrp\protect\cyre
+    \protect\cyrn\protect\cyrya
+  \or
+   \protect\CYRZH\protect\cyrn\protect\cyrii\protect\cyrushrt
+    \protect\cyrn\protect\cyrya
+  \or
+   \protect\CYRV\protect\cyre\protect\cyrr\protect\cyra\protect\cyrs
+    \protect\cyrn\protect\cyrya
+  \or
+   \protect\CYRK\protect\cyra\protect\cyrs\protect\cyrt\protect\cyrr
+    \protect\cyrery\protect\cyrch\protect\cyrn\protect\cyrii
+    \protect\cyrk\protect\cyra
+  \or
+   \protect\CYRL\protect\cyrii\protect\cyrs\protect\cyrt\protect\cyra
+    \protect\cyrp\protect\cyra\protect\cyrd\protect\cyra
+  \or
+   \protect\CYRS\protect\cyrn\protect\cyre\protect\cyrzh\protect\cyrn
+    \protect\cyrya
+  \fi
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianshortmonthname}
+% Abbreviated belarusian month names.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianshortmonthname}[1]{%
+  \ifcase#1
+  \or
+   \protect\cyrs\protect\cyrt\protect\cyru
+  \or
+   \protect\cyrl\protect\cyryu\protect\cyrt
+  \or
+   \protect\cyrs\protect\cyra\protect\cyrk
+  \or
+   \protect\cyrk\protect\cyrr\protect\cyra
+  \or
+   \protect\cyrm\protect\cyra\protect\cyrya
+  \or
+   \protect\cyrch\protect\cyrerev\protect\cyrr
+  \or
+   \protect\cyrl\protect\cyrii\protect\cyrp
+  \or
+   \protect\cyrzh\protect\cyrn\protect\cyrii
+  \or
+   \protect\cyrv\protect\cyre\protect\cyrr
+  \or
+   \protect\cyrk\protect\cyra\protect\cyrs
+  \or
+   \protect\cyrl\protect\cyrii\protect\cyrs
+  \or
+   \protect\cyrs\protect\cyrn\protect\cyre
+  \fi
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianshortMonthname}
+% Abbreviated belarusian month names start with a capital.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianshortMonthname}[1]{%
+  \ifcase#1
+  \or
+   \protect\CYRS\protect\cyrt\protect\cyru
+  \or
+   \protect\CYRL\protect\cyryu\protect\cyrt
+  \or
+   \protect\CYRS\protect\cyra\protect\cyrk
+  \or
+   \protect\CYRK\protect\cyrr\protect\cyra
+  \or
+   \protect\CYRM\protect\cyra\protect\cyrya
+  \or
+   \protect\CYRCH\protect\cyrerev\protect\cyrr
+  \or
+   \protect\CYRL\protect\cyrii\protect\cyrp
+  \or
+   \protect\CYRZH\protect\cyrn\protect\cyrii
+  \or
+   \protect\CYRV\protect\cyre\protect\cyrr
+  \or
+   \protect\CYRK\protect\cyra\protect\cyrs
+  \or
+   \protect\CYRL\protect\cyrii\protect\cyrs
+  \or
+   \protect\CYRS\protect\cyrn\protect\cyre
+  \fi
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianweekdayname}
+% Belarusian day of week names.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianweekdayname}[1]{%
+  \ifcase#1
+   \protect\cyrp\protect\cyra\protect\cyrn\protect\cyrya
+   \protect\cyrd\protect\cyrz\protect\cyre\protect\cyrl
+   \protect\cyra\protect\cyrk
+  \or
+   \protect\cyra\protect\cyrushrt\protect\cyrt\protect\cyro
+   \protect\cyrr\protect\cyra\protect\cyrk
+  \or
+   \protect\cyrs\protect\cyre\protect\cyrr\protect\cyra
+   \protect\cyrd\protect\cyra
+  \or
+   \protect\cyrch\protect\cyra\protect\cyrc\protect\cyrv
+   \protect\cyre\protect\cyrr
+  \or
+   \protect\cyrp\protect\cyrya\protect\cyrt\protect\cyrn
+   \protect\cyrii\protect\cyrc\protect\cyra
+  \or
+   \protect\cyrs\protect\cyru\protect\cyrb\protect\cyro
+   \protect\cyrt\protect\cyra
+  \or
+   \protect\cyrn\protect\cyrya\protect\cyrd\protect\cyrz
+   \protect\cyre\protect\cyrl\protect\cyrya
+  \fi
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianWeekdayname}
+% Belarusian day of week names start with a capital.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianWeekdayname}[1]{%
+  \ifcase#1
+   \protect\CYRP\protect\cyra\protect\cyrn\protect\cyrya\protect\cyrd
+   \protect\cyrz\protect\cyre\protect\cyrl\protect\cyra
+   \protect\cyrk
+  \or
+   \protect\CYRA\protect\cyrushrt\protect\cyrt\protect\cyro
+   \protect\cyrr\protect\cyra\protect\cyrk
+  \or
+   \protect\CYRS\protect\cyre\protect\cyrr\protect\cyra
+   \protect\cyrd\protect\cyra
+  \or
+   \protect\CYRCH\protect\cyra\protect\cyrc\protect\cyrv
+   \protect\cyre\protect\cyrr
+  \or
+   \protect\CYRP\protect\cyrya\protect\cyrt\protect\cyrn
+   \protect\cyrii\protect\cyrc\protect\cyra
+  \or
+   \protect\CYRS\protect\cyru\protect\cyrb\protect\cyro
+   \protect\cyrt\protect\cyra
+  \or
+   \protect\CYRN\protect\cyrya\protect\cyrd\protect\cyrz
+   \protect\cyre\protect\cyrl\protect\cyrya
+  \fi
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianshortweekdayname}
+% Abbreviated belarusian day of week names.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianshortweekdayname}[1]{%
+  \ifcase#1
+   \protect\cyrp\protect\cyrn
+  \or
+   \protect\cyra\protect\cyrushrt\protect\cyrt
+  \or
+   \protect\cyrs\protect\cyre\protect\cyrr
+  \or
+   \protect\cyrch\protect\cyra\protect\cyrc
+  \or
+   \protect\cyrp\protect\cyrt
+  \or
+   \protect\cyrs\protect\cyrb
+  \or
+   \protect\cyrn\protect\cyrd\protect\cyrz
+  \fi
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianshortWeekdayname}
+% Abbreviated belarusian day of week names start with a capital.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianshortWeekdayname}[1]{%
+  \ifcase#1
+   \protect\CYRP\protect\cyrn
+  \or
+   \protect\CYRA\protect\cyrushrt\protect\cyrt
+  \or
+   \protect\CYRS\protect\cyre\protect\cyrr
+  \or
+   \protect\CYRCH\protect\cyra\protect\cyrc
+  \or
+   \protect\CYRP\protect\cyrt
+  \or
+   \protect\CYRS\protect\cyrb
+  \or
+   \protect\CYRN\protect\cyrd\protect\cyrz
+  \fi
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\iffalse
+%    \begin{macrocode}
+%</datetime2-belarusian-ascii.ldf>
+%    \end{macrocode}
+%\fi
+%
+%\subsection{Main Belarusian Module (\texttt{datetime2-belarusian.ldf})}
+%\changes{1.0}{2021-03-25}{Initial release}
+%
+%\iffalse
+%    \begin{macrocode}
+%<*datetime2-belarusian.ldf>
+%    \end{macrocode}
+%\fi
+%
+% Identify Module
+%    \begin{macrocode}
+\ProvidesDateTimeModule{belarusian}[2021/03/25 v1.0]
+%    \end{macrocode}
+% Need to find out if XeTeX or LuaTeX are being used.
+%    \begin{macrocode}
+\RequirePackage{ifxetex,ifluatex}
+%    \end{macrocode}
+% XeTeX, LuaTeX and LaTeX (release after 2019/10/01) natively
+% support UTF-8, so load \texttt{belarusian-utf8} if either
+% of those engines are used otherwise load
+% \texttt{belarusian-ascii}.
+%    \begin{macrocode}
+\ifxetex
+ \RequireDateTimeModule{belarusian-utf8}
+\else
+ \ifluatex
+   \RequireDateTimeModule{belarusian-utf8}
+ \else
+   \@ifl@t@r\fmtversion{2019/10/01} 
+   { \RequireDateTimeModule{belarusian-utf8} }
+   { \RequireDateTimeModule{belarusian-ascii} }
+ \fi
+\fi
+%    \end{macrocode}
+%
+% Define the \texttt{belarusian} style.
+% The time style is the same as the "default" style
+% provided by \sty{datetime2}. This may need correcting. For
+% example, if a 12 hour style similar to the "englishampm" (from the
+% "english-base" module) is required. 
+%
+% Allow the user a way of configuring the "belarusian" and
+% "belarusian-numeric" styles. This doesn't use the package wide
+% separators such as
+% \cs{dtm@datetimesep} in case other date formats are also required.
+%\begin{macro}{\DTMbelarusiandaymonthsep}
+% The separator between the day and month for the text format.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusiandaymonthsep}{%
+ \DTMtexorpdfstring{\protect~}{\space}}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusianmonthyearsep}
+% The separator between the month and year for the text format.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianmonthyearsep}{\space}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusiandatetimesep}
+% The separator between the date and time blocks in the full format
+% (either text or numeric).
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusiandatetimesep}{\space}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusiantimezonesep}
+% The separator between the time and zone blocks in the full format
+% (either text or numeric).
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusiantimezonesep}{\space}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusiandatesep}
+% The separator for the numeric date format.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusiandatesep}{.}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\DTMbelarusiantimesep}
+% The separator for the numeric time format.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusiantimesep}{:}
+%    \end{macrocode}
+%\end{macro}
+%
+%Provide keys that can be used in \cs{DTMlangsetup} to set these
+%separators.
+%    \begin{macrocode}
+\DTMdefkey{belarusian}{daymonthsep}{\renewcommand*{\DTMbelarusiandaymonthsep}{#1}}
+\DTMdefkey{belarusian}{monthyearsep}{\renewcommand*{\DTMbelarusianmonthyearsep}{#1}}
+\DTMdefkey{belarusian}{datetimesep}{\renewcommand*{\DTMbelarusiandatetimesep}{#1}}
+\DTMdefkey{belarusian}{timezonesep}{\renewcommand*{\DTMbelarusiantimezonesep}{#1}}
+\DTMdefkey{belarusian}{datesep}{\renewcommand*{\DTMbelarusiandatesep}{#1}}
+\DTMdefkey{belarusian}{timesep}{\renewcommand*{\DTMbelarusiantimesep}{#1}}
+%    \end{macrocode}
+%
+% TODO: provide a boolean key to switch between full and abbreviated
+% formats if appropriate. (I don't know how the date should be
+% abbreviated.)
+%
+% Define a boolean key that determines if the time zone mappings
+% should be used.
+%    \begin{macrocode}
+\DTMdefboolkey{belarusian}{mapzone}[true]{}
+%    \end{macrocode}
+% The default is to use mappings.
+%    \begin{macrocode}
+\DTMsetbool{belarusian}{mapzone}{true}
+%    \end{macrocode}
+%
+% Define a boolean key that determines if the day of month should be
+% displayed.
+%    \begin{macrocode}
+\DTMdefboolkey{belarusian}{showdayofmonth}[true]{}
+%    \end{macrocode}
+% The default is to show the day of month.
+%    \begin{macrocode}
+\DTMsetbool{belarusian}{showdayofmonth}{true}
+%    \end{macrocode}
+%
+% Define a boolean key that determines if the year should be
+% displayed.
+%    \begin{macrocode}
+\DTMdefboolkey{belarusian}{showyear}[true]{}
+%    \end{macrocode}
+% The default is to show the year.
+%    \begin{macrocode}
+\DTMsetbool{belarusian}{showyear}{true}
+%    \end{macrocode}
+%
+% Define the "belarusian" style. (TODO: implement day of week?)
+%    \begin{macrocode}
+\DTMnewstyle
+ {belarusian}% label
+ {% date style
+   \renewcommand*\DTMdisplaydate[4]{%
+     \DTMifbool{belarusian}{showdayofmonth}
+     {\DTMbelarusianordinal{##3}\DTMbelarusiandaymonthsep}%
+     {}%
+     \DTMbelarusianmonthname{##2}%
+     \DTMifbool{belarusian}{showyear}%
+     {%
+       \DTMbelarusianmonthyearsep
+       \DTMbelarusianyear{##1}%
+     }%
+     {}%
+   }%
+   \renewcommand*\DTMDisplaydate[4]{%
+     \DTMifbool{belarusian}{showdayofmonth}
+     {%
+       \DTMbelarusianordinal{##3}\DTMbelarusiandaymonthsep
+       \DTMbelarusianMonthname{##2}%
+     }%
+     {%
+       \DTMbelarusianMonthname{##2}%
+     }%
+     \DTMifbool{belarusian}{showyear}%
+     {%
+       \DTMbelarusianmonthyearsep
+       \DTMbelarusianyear{##1}%
+     }%
+     {}%
+   }%
+ }%
+ {% time style (use default)
+   \DTMsettimestyle{default}%
+ }%
+ {% zone style
+   \DTMresetzones
+   \DTMbelarusianzonemaps
+   \renewcommand*{\DTMdisplayzone}[2]{%
+     \DTMifbool{belarusian}{mapzone}%
+     {\DTMusezonemapordefault{##1}{##2}}%
+     {%
+       \ifnum##1<0\else+\fi\DTMtwodigits{##1}%
+       \ifDTMshowzoneminutes\DTMbelarusiantimesep\DTMtwodigits{##2}\fi
+     }%
+   }%
+ }%
+ {% full style
+   \renewcommand*{\DTMdisplay}[9]{%
+    \ifDTMshowdate
+     \DTMdisplaydate{##1}{##2}{##3}{##4}%
+     \DTMbelarusiandatetimesep
+    \fi
+    \DTMdisplaytime{##5}{##6}{##7}%
+    \ifDTMshowzone
+     \DTMbelarusiantimezonesep
+     \DTMdisplayzone{##8}{##9}%
+    \fi
+   }%
+   \renewcommand*{\DTMDisplay}[9]{%
+    \ifDTMshowdate
+     \DTMDisplaydate{##1}{##2}{##3}{##4}%
+     \DTMbelarusiandatetimesep
+    \fi
+    \DTMdisplaytime{##5}{##6}{##7}%
+    \ifDTMshowzone
+     \DTMbelarusiantimezonesep
+     \DTMdisplayzone{##8}{##9}%
+    \fi
+   }%
+ }%
+%    \end{macrocode}
+%
+% Define numeric style.
+%    \begin{macrocode}
+\DTMnewstyle
+ {belarusian-numeric}% label
+ {% date style
+    \renewcommand*\DTMdisplaydate[4]{%
+      \DTMifbool{belarusian}{showdayofmonth}%
+      {%
+        \number##3 % space intended
+        \DTMbelarusiandatesep
+      }%
+      {}%
+      \number##2 % space intended
+      \DTMifbool{belarusian}{showyear}%
+      {%
+        \DTMbelarusiandatesep
+        \number##1 % space intended
+      }%
+      {}%
+    }%
+    \renewcommand*{\DTMDisplaydate}[4]{\DTMdisplaydate{##1}{##2}{##3}{##4}}%
+ }%
+ {% time style
+    \renewcommand*\DTMdisplaytime[3]{%
+      \number##1
+      \DTMbelarusiantimesep\DTMtwodigits{##2}%
+      \ifDTMshowseconds\DTMbelarusiantimesep\DTMtwodigits{##3}\fi
+    }%
+ }%
+ {% zone style
+   \DTMresetzones
+   \DTMbelarusianzonemaps
+   \renewcommand*{\DTMdisplayzone}[2]{%
+     \DTMifbool{belarusian}{mapzone}%
+     {\DTMusezonemapordefault{##1}{##2}}%
+     {%
+       \ifnum##1<0\else+\fi\DTMtwodigits{##1}%
+       \ifDTMshowzoneminutes\DTMbelarusiantimesep\DTMtwodigits{##2}\fi
+     }%
+   }%
+ }%
+ {% full style
+   \renewcommand*{\DTMdisplay}[9]{%
+    \ifDTMshowdate
+     \DTMdisplaydate{##1}{##2}{##3}{##4}%
+     \DTMbelarusiandatetimesep
+    \fi
+    \DTMdisplaytime{##5}{##6}{##7}%
+    \ifDTMshowzone
+     \DTMbelarusiantimezonesep
+     \DTMdisplayzone{##8}{##9}%
+    \fi
+   }%
+   \renewcommand*{\DTMDisplay}{\DTMdisplay}%
+ }
+%    \end{macrocode}
+%
+%\begin{macro}{\DTMbelarusianzonemaps}
+% The time zone mappings are set through this command, which can be
+% redefined if extra mappings are required or mappings need to be
+% removed. These may need translating (in which case the definitions
+% might need to be moved to the \texttt{utf8} and \texttt{ascii} ldf
+% files). Daylight saving is not taken into account.
+%    \begin{macrocode}
+\newcommand*{\DTMbelarusianzonemaps}{%
+  \DTMdefzonemap{02}{00}{EET}%
+}
+%    \end{macrocode}
+%\end{macro}
+
+% Switch style according to the \opt{useregional} setting.
+%    \begin{macrocode}
+\DTMifcaseregional
+{}% do nothing
+{\DTMsetstyle{belarusian}}
+{\DTMsetstyle{belarusian-numeric}}
+%    \end{macrocode}
+%
+% Redefine \cs{datebelarusian} (or \cs{date}\meta{dialect}) to prevent
+% \sty{babel} from resetting \cs{today}. (For this to work,
+% \sty{babel} must already have been loaded if it's required.)
+%    \begin{macrocode}
+\ifcsundef{date\CurrentTrackedDialect}
+{%
+  \ifundef\datebelarusian
+  {% do nothing
+  }%
+  {%
+    \def\datebelarusian{%
+      \DTMifcaseregional
+      {}% do nothing
+      {\DTMsetstyle{belarusian}}%
+      {\DTMsetstyle{belarusian-numeric}}%
+    }%
+  }%
+}%
+{%
+  \csdef{date\CurrentTrackedDialect}{%
+    \DTMifcaseregional
+    {}% do nothing
+    {\DTMsetstyle{belarusian}}%
+    {\DTMsetstyle{belarusian-numeric}}%
+  }%
+}%
+%    \end{macrocode}
+%\iffalse
+%    \begin{macrocode}
+%</datetime2-belarusian.ldf>
+%    \end{macrocode}
+%\fi
+%\Finale
+\endinput

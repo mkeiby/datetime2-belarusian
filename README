@@ -1,0 +1,54 @@
+Belarusian Language Module for datetime2 Package
+
+Author: Mikalai Keida
+
+Licence: LPPL
+
+Required Packages: datetime2, tracklang
+
+Example usage:
+
+\documentclass{article}
+\usepackage[belarusian]{datetime2}
+\begin{document}
+\today
+\end{document}
+
+\documentclass[belarusian]{article}
+\usepackage{babel}
+\usepackage[useregional]{datetime2}
+\begin{document}
+\today
+\end{document}
+
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage{belarusian}
+\usepackage[belarusian]{datetime2}
+\begin{document}
+\today
+\end{document}
+
+INSTALLATION
+============
+
+xelatex datetime2-belarusian.ins
+
+Move all *.ldf files to
+TEXMF/tex/latex/datetime2-contrib/datetime2-belarusian/
+
+Documentation:
+
+xelatex datetime2-belarusian.dtx
+makeindex -s gind.ist datetime2-belarusian.idx
+makeindex -s gglo.ist -o datetime2-belarusian.gls datetime2-belarusian.glo
+xelatex datetime2-belarusian.dtx
+xelatex datetime2-belarusian.dtx
+
+Move datetime2-belarusian.pdf and README to
+TEXMF/doc/latex/datetime2-contrib/datetime2-belarusian/
+
+This material is subject to the LaTeX Project Public License.
+See http://www.ctan.org/license/lppl1.3 for the details of that
+license.
+
